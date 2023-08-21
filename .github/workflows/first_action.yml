@@ -5,6 +5,7 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
       - run: cargo install trunk
       - run: trunk build
