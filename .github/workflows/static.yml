@@ -38,7 +38,7 @@ jobs:
       - name: add wasm target
         run: rustup target add wasm32-unknown-unknown
       - name: Build site
-        run: trunk build
+        run: trunk build .
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
