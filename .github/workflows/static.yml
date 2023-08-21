@@ -35,6 +35,8 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install trunk
         run: cargo install trunk
+      - name: add wasm target
+        run: rustup target add wasm32-unknown-unknown
       - name: Build site
         run: trunk build
       - name: Upload artifact
