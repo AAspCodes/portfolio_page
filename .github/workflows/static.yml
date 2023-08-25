@@ -38,11 +38,11 @@ jobs:
       - name: add wasm target
         run: rustup target add wasm32-unknown-unknown
       - name: Build site
-        run: trunk build index.html
+        run: trunk build index.html && pwd && ls && ls dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: 'dist/*'
+          path: './dist/*'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
