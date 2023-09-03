@@ -39,6 +39,8 @@ jobs:
         run: rustup target add wasm32-unknown-unknown
       - name: Build site
         run: trunk build index.html
+      - name: Set file permissions
+        run: chmod 777 dist/*
       - name: Compress built site files
         run: tar -zcvf github-pages dist/*
       - name: Upload artifact
