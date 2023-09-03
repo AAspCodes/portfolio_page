@@ -38,7 +38,9 @@ jobs:
       - name: add wasm target
         run: rustup target add wasm32-unknown-unknown
       - name: Build site
-        run: trunk build index.html && tar -zcvf github-pages dist/*
+        run: trunk build index.html
+      - name: Compress built site files
+        run: tar -zcvf github-pages dist/*
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
