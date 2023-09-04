@@ -51,7 +51,7 @@ jobs:
       - name: Add wasm target
         run: rustup target add wasm32-unknown-unknown
       - name: Build site
-        run: trunk build --release --public-url https://github.com/AAspCodes/portfolio_page
+        run: trunk build --release --public-url https://aaspcodes.github.io/portfolio_page
       - name: Set file permissions
         run: chmod 777 dist/*
       - name: Upload artifact
