@@ -53,7 +53,7 @@ jobs:
       # - name: add wasm target
       #   run: rustup target add wasm32-unknown-unknown
       - name: Build site
-        run: trunk build index.html
+        run: trunk build --release
       - name: Set file permissions
         run: chmod 777 dist/*
       # - name: Compress built site files
