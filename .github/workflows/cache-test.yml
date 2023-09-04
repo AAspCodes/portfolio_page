@@ -37,6 +37,11 @@ jobs:
       # The `uses` key tells the job to retrieve the action named `actions/checkout`. This is an action that checks out your repository and downloads it to the runner, allowing you to run actions against your code (such as testing tools). You must use the checkout action any time your workflow will use the repository's code or you are using an action defined in the repository.
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Install trunk
+        run: cargo install trunk
+      - name: Add wasm target
+        run: rustup target add wasm32-unknown-unknown
+       
      
       - name: cache-thing
         uses: actions/cache@v3
@@ -50,3 +55,5 @@ jobs:
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       - name: cargo-test
         run: cargo version
+      - name: trunk-test
+        run: trunk --version
