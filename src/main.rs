@@ -1,59 +1,54 @@
-use stylist::{
-    css,
-    yew::{styled_component, Global},
-};
+use stylist::yew::styled_component;
 use yew::prelude::*;
 
-#[function_component(App)]
+const STYLE_FILE: &str = include_str!("main.css");
+
+#[styled_component(App)]
 pub fn app() -> Html {
+    let stylesheet = stylist::Style::new(STYLE_FILE).unwrap();
     html! {
-        <Inner/>
-    }
-}
-
-#[styled_component]
-pub fn Inner() -> Html {
-    html! {
-        <>
-        <Global css={css!(
-            r#"
-                html, body {
-                    font-family: sans-serif;
-
-                    padding: 0;
-                    margin: 0;
-
-                    display: flex;
-                    justify-content: top;
-                    align-items: center;
-                    min-height: 100vh;
-                    flex-direction: column;
-
-                    background-color: rgb(50,50,50);
-                    color: white;
-                }
-
-                .HeaderPanel {
-                    min-height: 20vh;
-                    min-width: 50vh;
-                    background-color: rgb(255,0,0);
-                }
-            "#,
-    )} />
-        <HeaderPanel/>
-        <h1>{ "Hello World" }</h1>
-        </>
-    }
-}
-
-#[styled_component]
-fn HeaderPanel() -> Html {
-    html! {
-        <div class="HeaderPanel">
-        <div> {"header"} </div>
+        <div class={stylesheet}>
+            <div class="app">
+                <Headpanel/>
+                <Sidepanel/>
+            </div>
         </div>
     }
 }
+
+#[styled_component(Headpanel)]
+fn head_panel()->Html {
+    html!(
+        <div class="Headpanel">
+            <h1> {"Portfolio Page"} </h1>
+        </div>
+    )
+
+}
+
+#[styled_component(Sidepanel)]
+fn side_panel()->Html {
+    html!(
+        <div class="sidepanel">
+            <Navlist/>
+        </div>
+    )
+
+}
+
+#[styled_component(Navlist)]
+fn nav_list() -> Html {
+    let items = {1..5}.collect::<Vec<_>>();
+    html!(
+            <ul class="nav-list">
+                {items.into_iter().map(|i| {
+                    html!{<li class="panelitem">{format!("item {}", i)}</li>}
+                }).collect::<Html>() }
+            </ul>
+
+    )
+}
+
 
 fn main() {
     yew::Renderer::<App>::new().render();
